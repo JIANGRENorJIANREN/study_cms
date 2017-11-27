@@ -1,3 +1,6 @@
+#!/usr/bin/env/
+#coding:utf-8
+
 """study_cms URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -15,10 +18,14 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from study_contents import views as sc_views #django1.11 引用方法
 
-from DjangoUeditor import urls as DjangoUeditor_urls
 
 urlpatterns = [
+    url(r'^$', sc_views.index, name='index'),
+    url(r'^column/(?P<column_slug>[^/]+)/$', sc_views.column_detail, name='column_detail'),
+    url(r'^article/(?P<article_slug>[^/]+)/$', sc_views.article_detail, name='article_detail'),
+
     url(r'^admin/', admin.site.urls),
     url(r'^ueditor/',include('DjangoUeditor.urls')),
 	#    url(r'^ueditor/',include(DjangoUeditor_urls)),
