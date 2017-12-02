@@ -23,8 +23,9 @@ from study_contents import views as sc_views #django1.11 引用方法
 
 urlpatterns = [
     url(r'^$', sc_views.index, name='index'),
-    url(r'^column/(?P<column_slug>[^/]+)/$', sc_views.column_detail, name='column_detail'),
-    url(r'^article/(?P<article_slug>[^/]+)/$', sc_views.article_detail, name='article_detail'),
+    url(r'^column/(?P<column_slug>[^/]+)/$', sc_views.column_detail, name='column'),
+    #url(r'^article/(?P<article_slug>[^/]+)/$', sc_views.article_detail, name='article'),
+    url(r'^study_contents/(?P<pk>\d+)/(?P<article_slug>[^/]+)/$', sc_views.article_detail, name='article'),
 
     url(r'^admin/', admin.site.urls),
     url(r'^ueditor/',include('DjangoUeditor.urls')),

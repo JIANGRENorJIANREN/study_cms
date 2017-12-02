@@ -7,6 +7,7 @@ from django.db import models
 
 from django.utils.encoding import python_2_unicode_compatible
 from DjangoUeditor.models import UEditorField
+from django.core.urlresolvers import reverse
 
 '''
 知识点1:装饰器(decorator)是一种在代码运行期间动态增加功能的方式
@@ -33,6 +34,9 @@ class Column(models.Model):
 		verbose_name_plural = '栏目'
 		ordering = ['name']
 
+	def get_absolute_url(self):
+		return reverse('column',args=(self.slug,))
+
 
 @python_2_unicode_compatible
 class Article(models.Model):
@@ -58,3 +62,6 @@ class Article(models.Model):
 	class Meta:
 		verbose_name = '从这里开始'
 		verbose_name_plural = '教程'    #plural:复数形式
+
+	def get_absolute_url(self):
+		return reverse('article',args=(self.pk, self.slug))
