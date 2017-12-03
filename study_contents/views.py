@@ -7,8 +7,14 @@ from study_contents.models import Column, Article
 # Create your views here.
 def index(request):
 	#return HttpResponse(u'欢迎来自强学堂学习Django')
-	columns = Column.objects.all()
-	return render(request, 'index.html', {'columns': columns})
+	#columns = Column.objects.all()
+	home_display_columns = Column.objects.filter(home_display=True)
+	nav_display_columns = Column.objects.filter(nav_display=True)
+
+	return render(request, 'index.html', {
+		'home_display_columns':home_display_columns,
+		'nav_display_columns':nav_display_columns,
+	})
 
 
 def column_detail(request, column_slug):
